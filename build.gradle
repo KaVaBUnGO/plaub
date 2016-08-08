@@ -1,15 +1,17 @@
 buildscript {
-	ext {
-		springBootVersion = '1.4.0.RELEASE'
-		springLoadedVerison = '1.2.6.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath ("org.springframework:springloaded:${springLoadedVerison}")
-	}
+  ext {
+    springBootVersion = '1.4.0.RELEASE'
+    springLoadedVerison = '1.2.6.RELEASE'
+  }
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-release" }
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    classpath("org.springframework:springloaded:${springLoadedVerison}")
+  }
 }
 
 apply plugin: 'java'
@@ -17,31 +19,36 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
-	baseName = 'plaub'
-	version = '0.0.1-SNAPSHOT'
+  baseName = 'plaub'
+  version = '0.0.1-SNAPSHOT'
 }
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+
+compileJava {
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+  options.encoding = 'UTF-8'
+}
 
 repositories {
-	mavenCentral()
+  mavenLocal()
+  mavenCentral()
 }
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity3:3.0.0.RELEASE');
-	runtime('com.h2database:h2')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+  compile("org.springframework.boot:spring-boot-devtools")
+  compile('org.springframework.boot:spring-boot-starter-web')
+  compile('org.springframework.boot:spring-boot-starter-data-jpa')
+  compile('org.springframework.boot:spring-boot-starter-security')
+  compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+  compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity3:3.0.0.RELEASE');
+  runtime('com.h2database:h2')
+  testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-
 idea {
-	module {
-		inheritOutputDirs = false
-		outputDir = file("$buildDir/classes/main/")
-	}
+  module {
+    inheritOutputDirs = false
+    outputDir = file("$buildDir/classes/main/")
+  }
 }
