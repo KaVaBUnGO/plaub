@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1>Error</h1>
+    There was an unexpected error (type=<span th:text="${error}">Bad</span>, status=<span th:text="${status}">500</span>).
+    <div>Fake content</div>
+    <div>
+        Please contact the operator with the above information.
+    </div>
+</div>
+</body>
+</html>
